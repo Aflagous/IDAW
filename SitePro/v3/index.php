@@ -22,8 +22,8 @@ renderMenuToHTML($currentPageId, $currentLang);
 if(is_readable($pageToInclude))
    require_once($pageToInclude);
 ?>
-<a href="index.php?page=index&lang=en">Anglais</a>
-<a href="index.php?page=index&lang=fr">Francais</a>
+<a href="index.php?page=<?php echo $currentPageId; ?>&lang=en">Anglais</a>
+<a href="index.php?page=<?php echo $currentPageId; ?>&lang=fr">Francais</a>
 
 </section>
 
