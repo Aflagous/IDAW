@@ -1,13 +1,10 @@
 <?php
-    require_once("layers/template_header.php");
-    require_once("layers/template_menu.php");
+    require_once("./layers/template_header.php");
+    require_once("./layers/template_menu.php");
     $currentPageId = 'cv';
  ?>
-<header class="bandeau_haut">
-<h1 class="titre">Gratens Durand</h1>
-</header>
+
 <?php
-renderMenuToHTML($currentPageId);
 ?>
 <section class="corps">
 <div class="info">
@@ -15,19 +12,19 @@ renderMenuToHTML($currentPageId);
                 <div class="hobbie">
                     <div class="boite"><div class="boiboite"></div><div class="boiboite"></div><div class="boiboite"></div><div class="boiboite"></div><div class="boiboite"></div></div>
                     <h2>
-                        TALL
+                            tall
                     </h2>
                 </div>
                 <div class="hobbie">
                     <div class="boite"><div class="boiboite"></div><div class="boiboite"></div><div class="boiboite"></div><div class="boiboite"></div></div>
                     <h2>
-                        STRONG
+                        strong
                     </h2>
                 </div>
                 <div class="hobbie">
                     <div class="boite"><div class="boiboite"></div><div class="boiboite"></div><div class="boiboite"></div><div class="boiboite"></div><div class="boiboite"></div><div class="boiboite"></div></div>
                     <h2>
-                        SMART
+                        smart
                     </h2>
                 </div>
             </div>
@@ -35,5 +32,5 @@ renderMenuToHTML($currentPageId);
 </section>
 
 <?php
-require_once("layers/template_footer.php");
+require_once("./layers/template_footer.php");
 ?>

@@ -1,14 +1,9 @@
 <?php
-    require_once("layers/template_header.php");
-    require_once("layers/template_menu.php");
+    require_once("./layers/template_header.php");
+    require_once("./layers/template_menu.php");
     $currentPageId = 'contact';
  ?>
-<header class="bandeau_haut">
-<h1 class="titre">Gratens Durand</h1>
-</header>
-<?php
-renderMenuToHTML($currentPageId);
-?>
+
 <section class="corps">
 <div class="info">
             <div class="hobbies">
@@ -33,5 +28,5 @@ renderMenuToHTML($currentPageId);
 </section>
 
 <?php
-require_once("layers/template_footer.php");
+require_once("./layers/template_footer.php");
 ?>
