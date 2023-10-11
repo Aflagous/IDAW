@@ -1,11 +1,4 @@
-<?php
-    require_once("./layers/template_header.php");
-    require_once("./layers/template_menu.php");
-    $currentPageId = 'cv';
- ?>
 
-<?php
-?>
 <section class="corps">
 <div class="info">
             <div class="hobbies">
@@ -30,7 +23,3 @@
             </div>
         </div>
 </section>
-
-<?php
-require_once("./layers/template_footer.php");
-?>
