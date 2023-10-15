@@ -10,22 +10,20 @@
     $pageToInclude =  '?page=' . $currentPageId;
  ?>
 
-<header class="bandeau_haut">
-<h1 class="titre">Gratens Durand</h1>
-</header>
-<?php
-renderMenuToHTML($currentPageId, $currentLang);
-?>
-<section class="corps">
 <?php
    $pageToInclude = $currentLang . "/" . $currentPageId . ".php";
-if(is_readable($pageToInclude))
-   require_once($pageToInclude);
+   echo '<div class="total">';
+      renderMenuToHTML($currentPageId, $currentLang);
+      if(is_readable($pageToInclude))
+         require_once($pageToInclude);
+   echo '</div>';
 ?>
-<a href="index.php?page=<?php echo $currentPageId; ?>&lang=en">Anglais</a>
-<a href="index.php?page=<?php echo $currentPageId; ?>&lang=fr">Francais</a>
 
-</section>
+
+<a class="lien" href="index.php?page=<?php echo $currentPageId; ?>&lang=en">Anglais</a>
+<a class="lien" href="index.php?page=<?php echo $currentPageId; ?>&lang=fr">Francais</a>
+
+
 
 <?php
 require_once("layers/template_footer.php");

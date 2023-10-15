@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `users`
+-- Structure de la table `utilisateurs`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `utilisateurs` (
   `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL
@@ -37,7 +37,7 @@ CREATE TABLE `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`) VALUES
+INSERT INTO `utilisateurs` (`id`, `name`, `email`) VALUES
 (1, 'Babou', 'babou.babou@gmail.com'),
 (2, 'RaphGui', 'Raph.Gui@gmail.com'),
 (3, 'toi', 'moi');
@@ -49,7 +49,7 @@ INSERT INTO `users` (`id`, `name`, `email`) VALUES
 --
 -- Index pour la table `users`
 --
-ALTER TABLE `users`
+ALTER TABLE `utilisateurs`
   ADD PRIMARY KEY (`id`);
 COMMIT;
 
