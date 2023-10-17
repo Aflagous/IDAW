@@ -1,0 +1,70 @@
+openapi: 3.0.0
+info:
+  title: API de Gestion des Utilisateurs
+  version: 1.0.0
+paths:
+  /users.php:
+    get:
+      summary: Récupérer tous les utilisateurs
+      responses:
+        '200':
+          description: Succès, retourne la liste des utilisateurs
+    post:
+      summary: Créer un nouvel utilisateur
+      requestBody:
+        description: Données de l'utilisateur à créer
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+              required:
+                - name
+                - email
+      responses:
+        '201':
+          description: Création réussie, retourne l'ID de l'utilisateur créé
+        '400':
+          description: Requête invalide, données manquantes ou incorrectes
+    put:
+      summary: Mettre à jour un utilisateur existant
+      requestBody:
+        description: Données de l'utilisateur à mettre à jour
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                email:
+                  type: string
+              required:
+                - id
+                - name
+                - email
+      responses:
+        '200':
+          description: Mise à jour réussie
+        '400':
+          description: Requête invalide, données manquantes ou incorrectes
+    delete:
+      summary: Supprimer un utilisateur existant
+      parameters:
+        - name: id
+          in: query
+          description: ID de l'utilisateur à supprimer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Suppression réussie
+        '404':
+          description: Utilisateur non trouvé
