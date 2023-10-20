@@ -4,4 +4,3 @@
     define('_MYSQL_DBNAME','dbtest');
     define('_MYSQL_USER','root');
     define('_MYSQL_PASSWORD','root');
-    

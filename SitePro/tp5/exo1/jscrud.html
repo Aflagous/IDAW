@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+   <meta charset='utf-8'>
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title>tabletest</title>
+   <style>
+      body {
+         margin-top: 5em;
+      }
+
+      .table {
+         margin-top: 100px;
+         margin-bottom: 100px;
+      }
+   </style>
+</head>
+
+<body>
+   <table class="table">
+      <thead>
+         <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Date de naissance</th>
+            <th scope="col">Aime le cours Web</th>
+            <th scope="col">Remarques</th>
+            <th scope="col">Actions</th>
+         </tr>
+      </thead>
+      <tbody id="studentsTableBody"></tbody>
+   </table>
+
+   <form id="addStudentForm">
+      <div class="form-group row">
+         <label for="inputNom" class="col-sm-2 col-form-label">Nom*</label>
+         <div class="col-sm-3">
+            <input type="text" class="form-control" id="inputNom">
+         </div>
+      </div>
+      <div class="form-group row">
+         <label for="inputPrenom" class="col-sm-2 col-form-label">Prénom</label>
+         <div class="col-sm-3">
+            <input type="text" class="form-control" id="inputPrenom">
+         </div>
+      </div>
+      <div class="form-group row">
+         <label for="inputDateNaissance" class="col-sm-2 col-form-label">Date de naissance</label>
+         <div class="col-sm-3">
+            <input type="date" class="form-control" id="inputDateNaissance">
+         </div>
+      </div>
+      <div class="form-group row">
+         <label for="inputAimeWeb" class="col-sm-2 col-form-label">Aime le cours Web</label>
+         <div class="col-sm-3">
+            <select class="form-control" id="inputAimeWeb">
+               <option value="Oui">Oui</option>
+               <option value="Non">Non</option>
+            </select>
+         </div>
+      </div>
+      <div class="form-group row">
+         <label for="inputRemarques" class="col-sm-2 col-form-label">Remarques</label>
+         <div class="col-sm-3">
+            <textarea class="form-control" id="inputRemarques"></textarea>
+         </div>
+      </div>
+      <div class="form-group row">
+         <span class="col-sm-2"></span>
+         <div class="col-sm-2">
+            <button type="button" class="btn btn-primary form-control" onclick="onFormSubmit();">Submit</button>
+         </div>
+      </div>
+   </form>
+
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+   <script>
+      function onFormSubmit() {
+         let nom = $("#inputNom").val();
+         let prenom = $("#inputPrenom").val();
+         let dateNaissance = $("#inputDateNaissance").val();
+         let aimeLeCoursWeb = $("#inputAimeWeb").val();
+         let remarques = $("#inputRemarques").val();
+
+         if (nom.trim() !== "") {
+            let deleteButton = '<button type="button" class="btn btn-danger btn-sm" onclick="onDeleteRow(this);">Supprimer</button>';
+            let editButton = '<button type="button" class="btn btn-warning btn-sm" onclick="onEditRow(this);">Modifier</button>';
+            $("#studentsTableBody").append(`<tr><td>${nom}</td><td>${prenom}</td><td>${dateNaissance}</td><td>${aimeLeCoursWeb}</td><td>${remarques}</td><td>${deleteButton} ${editButton}</td></tr>`);
+         }
+         $("#inputNom").val("");
+         $("#inputPrenom").val("");
+         $("#inputDateNaissance").val("");
+         $("#inputAimeWeb").val("Oui");
+         $("#inputRemarques").val("");
+      }
+
+      function onDeleteRow(button) {
+         // Obtenez la ligne parente du bouton cliqué et supprimez-la
+         $(button).closest('tr').remove();
+      }
+
+      function onEditRow(button) {
+         let row = $(button).closest('tr');
+         let columns = row.find('td');
+
+         // Remplissez les champs du formulaire avec les valeurs de la ligne sélectionnée
+         $("#inputNom").val(columns[0].textContent);
+         $("#inputPrenom").val(columns[1].textContent);
+         $("#inputDateNaissance").val(columns[2].textContent);
+         $("#inputAimeWeb").val(columns[3].textContent);
+         $("#inputRemarques").val(columns[4].textContent);
+
+         // Supprimez la ligne du tableau
+         row.remove();
+      }
+   </script>
+</body>
+
+</html>

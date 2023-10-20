@@ -2,39 +2,26 @@
 require_once('../config.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $name = $_GET['name'] ?? null;
-    if ($name) {
-        try {
-            $pdo = new PDO("mysql:host=" . _MYSQL_HOST . ";dbname=" . _MYSQL_DBNAME, _MYSQL_USER, _MYSQL_PASSWORD);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $stmt = $pdo->prepare("SELECT * FROM utilisateurs WHERE name = :name");
-            $stmt->bindParam(':name', $name);
-            $stmt->execute();
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    try {
+        $pdo = new PDO("mysql:host=" . _MYSQL_HOST . ";dbname=" . _MYSQL_DBNAME, _MYSQL_USER, _MYSQL_PASSWORD);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $stmt = $pdo->prepare("SELECT * FROM utilisateurs");
+        $stmt->execute();
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            if ($user) {
-                echo json_encode($user);
-            } else {
-                http_response_code(404);
-                echo json_encode(array("message" => "Utilisateur non trouvé"));
-            }
-        } catch (PDOException $e) {
-            http_response_code(500);
-            echo json_encode(array("message" => "Erreur serveur : " . $e->getMessage()));
-        }
-    } else {
-        http_response_code(400);
-        echo json_encode(array("message" => "Prénom d'utilisateur manquant"));
+        echo json_encode($users);
+    } catch (PDOException $e) {
+        http_response_code(500);
+        echo json_encode(array("message" => "Erreur serveur : " . $e->getMessage()));
     }
 }   elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data = json_decode(file_get_contents("php://input"), true);
-    if (isset($data['name']) && isset($data['email'])) {
+    if (isset($_POST['name']) && isset($_POST['email'])) {
         try {
             $pdo = new PDO("mysql:host=" . _MYSQL_HOST . ";dbname=" . _MYSQL_DBNAME, _MYSQL_USER, _MYSQL_PASSWORD);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $stmt = $pdo->prepare("INSERT INTO utilisateurs (name, email) VALUES (:name, :email)");
-            $stmt->bindParam(':name', $data['name']);
-            $stmt->bindParam(':email', $data['email']);
+            $stmt->bindParam(':name', $_POST['name']);
+            $stmt->bindParam(':email', $_POST['email']);
             $stmt->execute();
             http_response_code(201);
             echo json_encode(array("message" => "Utilisateur créé avec succès"));
